@@ -9,7 +9,14 @@
   },
   "dependencies": {
     "next": "10.2.0",
+    "next-auth": "^3.19.8",
     "react": "17.0.2",
     "react-dom": "17.0.2"
-  }
+  },
+  "devDependencies": {
+    "eslint": "^7.25.0"
+  },
+  "main": "index.js",
+  "author": "leonardo <leojn8@gmail.com>",
+  "license": "MIT"
 }
