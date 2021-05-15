@@ -1,36 +1,41 @@
 .containerFormulario {
   margin: 0 auto;
-  background: var(--gray-300);
+  background: var(--gray-400);
   width: 220px;
-  height: 150px;
+  height: 100%;
   margin-top: -20px;
   border-radius: 5px;
   text-align: center;
+  border: 2px solid #eba417  ;
 }
-.containerFormulario big {
-  color: var(--gray-800);
-}
-.mainTabela {
-  background: var(--gray-50);
-  width: 60%;
-  text-align: center;
-  margin: 0 auto;
+.containerFormulario button{
+  width:82%;
+  margin: 10px auto;
+  background:var(--yellow-500) ;
+  border-radius: 5px;
   color: var(--gray-900);
-  margin-top: 10px;
-  justify-content: space-between;
+  border: none;
 }
-.tbodyContainer {
-  border: 1px solid;
+.containerFormulario input{
+  height:25px;
+  border-radius: 5px;
+  background: var(--gray-300);
+  border:none;
+}
+.tableContainer1{
+  margin-top: 50px;
+  margin:  60px auto;
+  
+}
+.tableContainer1 thead{
+  background: var(--gray-700)
+}
+.tableContainer1 tbody{
   background: var(--gray-50);
+  color: var(--gray-900);
 }
-.tableContainer1 thead {
-  margin-left: 50px;
-}
-.tableContainer1 thead th {
-  border: 1px solid;
-  text-align: center;
-  margin-left: 20px;
-}
-.tableContainer1 tbody td{
-    background: #ffffff;
-}
+
+
+
+
+

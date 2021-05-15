@@ -1,36 +1,47 @@
 import Head from 'next/head';
 import { useContext, useState } from 'react';
 
-import { SignInButton } from '../../components/SignInButton';
-import { AuthContext } from '../providers/auth';
+import { Query as q } from 'faunadb';
+import { fauna } from '../../services/fauna';
+
 import styles from './styles/Home.module.css';
+import Pagination from '../../layouts/pagination';
 
 export default function Home() {
+  const [newTaskEndereco, setNewTaskEndereco] = useState('');
+  const [newTaskTelefone, setNewTaskTelefone] = useState('');
+  const [newTaskCpf, setNewTaskCpf] = useState('');
   const [newTaskEmail, setNewTaskEmail] = useState('');
   const [newTaskTitle, setNewTaskTitle] = useState('');
+
   const [tasks, setTasks] = useState([]);
-  function handleCreateTask() {
+
+  async function handleCreateTask() {
     if (!newTaskTitle) return;
 
     const newTask = {
-      id: Math.random().toFixed(2),
+      id: Math.random().toFixed(1),
       title: newTaskTitle,
       email: newTaskEmail,
+      cpf: newTaskCpf,
+      telefone: newTaskTelefone,
+      endereco: newTaskEndereco,
       isComplete: false,
     };
     setTasks((oldstate) => [...oldstate, newTask]);
     setNewTaskTitle('');
-    console.log(newTask);
+    setNewTaskEmail('');
+    setNewTaskCpf('');
+    setNewTaskTelefone('');
+    setNewTaskEndereco('');
 
-    localStorage.setItem('user', JSON.stringify(user));
-    setUser(input);
+    localStorage.setItem('newTask', JSON.stringify(newTask));
+    alert('salvo com sucesso!');
+
+    const newTasksGet = localStorage.getItem('newTask');
+    const newTasksParse = JSON.parse(newTasksGet);
+    console.log(newTasksParse);
   }
-
-  const [input, setInput] = useState({
-    name: '',
-  });
-  const { user, setUser } = useContext(AuthContext);
-  console.log(user);
 
   return (
     <div className={styles.containerHome}>
@@ -50,6 +61,7 @@ export default function Home() {
           </label>
           <br />
           <input
+            className="inputGroup"
             type="text"
             placeholder="Nome"
             onChange={(e) => setNewTaskTitle(e.target.value)}
@@ -61,39 +73,76 @@ export default function Home() {
           </label>
           <br />
           <input
+            className="inputGroup"
             type="text"
             placeholder="Email"
             onChange={(e) => setNewTaskEmail(e.target.value)}
             value={newTaskEmail}
           />
-          <SignInButton />
+
+          <label style={{ marginRight: 150 }} className="email" htmlFor="">
+            CPF
+          </label>
+          <br />
+          <input
+            className="inputGroup"
+            type="text"
+            placeholder="CPF"
+            onChange={(e) => setNewTaskCpf(e.target.value)}
+            value={newTaskCpf}
+          />
+
+          <label style={{ marginRight: 130 }} className="email" htmlFor="">
+            Telefone
+          </label>
+          <br />
+          <input
+            className="inputGroup"
+            type="text"
+            placeholder="Telefone"
+            onChange={(e) => setNewTaskTelefone(e.target.value)}
+            value={newTaskTelefone}
+          />
+
+          <label style={{ marginRight: 120 }} className="email" htmlFor="">
+            Endereço
+          </label>
+          <br />
+          <input
+            className="inputGroup"
+            type="text"
+            placeholder="Endereço"
+            onChange={(e) => setNewTaskEndereco(e.target.value)}
+            value={newTaskEndereco}
+          />
         </form>
         <button onClick={handleCreateTask}>Cadastrar</button>
       </div>
-      <main className={styles.mainTabela}>
-        <table className={styles.tableContainer1}>
-          <thead>
-            <tr>
-              <th>ID  </th>
-              <th>Title </th>
-              <th>E-mail  </th>
-              
-            </tr>
-          </thead>
 
-            {tasks.map((task) => (
-              <tbody>
-                <tr className={styles.tbodyContainer}>
-                  <td>{task.id}  </td>
-                  <td>{task.title} </td>
-                  <td>{task.email}</td>
-                  
-                </tr>
-              </tbody>
-            ))}
-          
-        </table>
-      </main>
+      <table className={styles.tableContainer1}>
+        <thead>
+          <tr>
+            <th>Nome </th>
+            <th>E-mail </th>
+            <th>CPF </th>
+            <th>Telefone </th>
+            <th>Endereço</th>
+          </tr>
+        </thead>
+
+        {tasks.map((task) => (
+          <tbody>
+            <tr className={styles.tbodyContainer}>
+              <td>{task.title}</td>
+              <td>{task.email} </td>
+              <td>{task.cpf}</td>
+              <td>{task.telefone}</td>
+              <td>{task.endereco}</td>
+            </tr>
+          </tbody>
+        ))}
+      </table>
+      <Pagination />
     </div>
   );
 }

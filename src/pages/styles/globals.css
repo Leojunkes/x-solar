@@ -7,7 +7,10 @@
 :root{
   --white:#ffffff;
   --gray-50:#e1e1e6;
+  
+  --gray-50:#e1e1e6;
   --gray-300:#a8a8b3;
+  --gray-400:#7b787d;
   --gray-700:#323238;
   --gray-800:#29292e;
   --gray-850:#1f2729;
