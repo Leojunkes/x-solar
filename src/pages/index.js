@@ -1,46 +1,58 @@
 import Head from 'next/head';
-import { useContext, useState } from 'react';
-
-import { Query as q } from 'faunadb';
-import { fauna } from '../../services/fauna';
+import { useState, useEffect } from 'react';
 
 import styles from './styles/Home.module.css';
 import Pagination from '../../layouts/pagination';
 
 export default function Home() {
+  const [tasks, setTasks] = useState([]);
   const [newTaskEndereco, setNewTaskEndereco] = useState('');
   const [newTaskTelefone, setNewTaskTelefone] = useState('');
   const [newTaskCpf, setNewTaskCpf] = useState('');
   const [newTaskEmail, setNewTaskEmail] = useState('');
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
-  const [tasks, setTasks] = useState([]);
+  const newTask = {
+    id: Math.random().toFixed(1),
+    title: newTaskTitle,
+    email: newTaskEmail,
+    cpf: newTaskCpf,
+    telefone: newTaskTelefone,
+    endereco: newTaskEndereco,
+    isComplete: false,
+  };
+  const [newTasks, setNewTasks] = useState(newTask);
 
-  async function handleCreateTask() {
+  useEffect(() => {
+    
+    const userStorage = localStorage.setItem(
+      'tasks',
+      JSON.stringify(newTaskTitle)
+    );
+    if (userStorage) {
+      setNewTasks(JSON.parse(userStorage));
+    } else {
+      setNewTasks({
+        newTasks
+      });
+    }
+    console.log(localStorage.getItem('tasks', newTasks));
+  }, []);
+
+  function handleCreateTask() {
     if (!newTaskTitle) return;
 
-    const newTask = {
-      id: Math.random().toFixed(1),
-      title: newTaskTitle,
-      email: newTaskEmail,
-      cpf: newTaskCpf,
-      telefone: newTaskTelefone,
-      endereco: newTaskEndereco,
-      isComplete: false,
-    };
     setTasks((oldstate) => [...oldstate, newTask]);
     setNewTaskTitle('');
     setNewTaskEmail('');
     setNewTaskCpf('');
     setNewTaskTelefone('');
     setNewTaskEndereco('');
-
-    localStorage.setItem('newTask', JSON.stringify(newTask));
     alert('salvo com sucesso!');
-
-    const newTasksGet = localStorage.getItem('newTask');
-    const newTasksParse = JSON.parse(newTasksGet);
-    console.log(newTasksParse);
+  }
+  function onSubmit(e){
+    e.preventDefault();
+    
   }
 
   return (
@@ -51,7 +63,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.containerFormulario}>
-        <form type="text " onSubmit="" action="">
+        <form onSubmit={onSubmit} className={styles.formContainer} >
           <label htmlFor="">
             <big>Formulário</big>
           </label>
@@ -115,8 +127,10 @@ export default function Home() {
             onChange={(e) => setNewTaskEndereco(e.target.value)}
             value={newTaskEndereco}
           />
+          <button type="submit" onClick={handleCreateTask}>Cadastrar</button>
         </form>
-        <button onClick={handleCreateTask}>Cadastrar</button>
+        
+        
       </div>
 
       <table className={styles.tableContainer1}>
