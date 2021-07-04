@@ -23,22 +23,6 @@ export default function Home() {
   };
   const [newTasks, setNewTasks] = useState(newTask);
 
-  useEffect(() => {
-    
-    const userStorage = localStorage.setItem(
-      'tasks',
-      JSON.stringify(newTaskTitle)
-    );
-    if (userStorage) {
-      setNewTasks(JSON.parse(userStorage));
-    } else {
-      setNewTasks({
-        newTasks
-      });
-    }
-    console.log(localStorage.getItem('tasks', newTasks));
-  }, []);
-
   function handleCreateTask() {
     if (!newTaskTitle) return;
 
@@ -50,9 +34,12 @@ export default function Home() {
     setNewTaskEndereco('');
     alert('salvo com sucesso!');
   }
-  function onSubmit(e){
+  function onSubmit(e) {
     e.preventDefault();
+    const cadastro = JSON.parse(localStorage.getItem(newTask))
     
+    localStorage.setItem('grupo',JSON.stringify(cadastro))
+
   }
 
   return (
@@ -63,7 +50,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.containerFormulario}>
-        <form onSubmit={onSubmit} className={styles.formContainer} >
+        <form onSubmit={onSubmit} className={styles.formContainer}>
           <label htmlFor="">
             <big>Formulário</big>
           </label>
@@ -79,6 +66,7 @@ export default function Home() {
             onChange={(e) => setNewTaskTitle(e.target.value)}
             value={newTaskTitle}
           />
+
           <br />
           <label style={{ marginRight: 140 }} className="email" htmlFor="">
             E-mail
@@ -91,7 +79,6 @@ export default function Home() {
             onChange={(e) => setNewTaskEmail(e.target.value)}
             value={newTaskEmail}
           />
-
           <label style={{ marginRight: 150 }} className="email" htmlFor="">
             CPF
           </label>
@@ -103,7 +90,6 @@ export default function Home() {
             onChange={(e) => setNewTaskCpf(e.target.value)}
             value={newTaskCpf}
           />
-
           <label style={{ marginRight: 130 }} className="email" htmlFor="">
             Telefone
           </label>
@@ -115,7 +101,6 @@ export default function Home() {
             onChange={(e) => setNewTaskTelefone(e.target.value)}
             value={newTaskTelefone}
           />
-
           <label style={{ marginRight: 120 }} className="email" htmlFor="">
             Endereço
           </label>
@@ -127,10 +112,10 @@ export default function Home() {
             onChange={(e) => setNewTaskEndereco(e.target.value)}
             value={newTaskEndereco}
           />
-          <button type="submit" onClick={handleCreateTask}>Cadastrar</button>
+          <button type="submit" onClick={handleCreateTask}>
+            Cadastrar
+          </button>
         </form>
-        
-        
       </div>
 
       <table className={styles.tableContainer1}>

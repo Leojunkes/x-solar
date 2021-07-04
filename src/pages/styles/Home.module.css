@@ -33,6 +33,7 @@ border-radius: 6px;
   align-items:center;
   margin: auto;
   text-align: center;
+  margin-top: -30px;
 }
 .containerFormulario input:focus {
   box-shadow: 0 0 0 0;
