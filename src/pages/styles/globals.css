@@ -30,6 +30,12 @@
     font-size: 87.5%;
   }
 }
+@media(max-width:365px){
+  html{
+    font-size: 51.5%;
+  }
+  
+}
 
 body{
   background: var(--gray-900);
