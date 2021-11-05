@@ -16,7 +16,7 @@ export default function Home() {
 
   const [tasks, setTasks] = useState([]);
   const [newTaskEndereco, setNewTaskEndereco] = useState('');
-  const [newTaskendereco1, setnewTaskEndereco1] = useState('');
+
   const [newTaskTelefone, setNewTaskTelefone] = useState('');
   const [newTaskCpf, setNewTaskCpf] = useState('');
   const [newTaskEmail, setNewTaskEmail] = useState('');
@@ -32,7 +32,7 @@ export default function Home() {
       cpf: newTaskCpf,
       telefone: newTaskTelefone,
       endereco: newTaskEndereco,
-      endereco1: newTaskendereco1,
+
       isComplete: false,
     };
     console.log(tasks);
@@ -47,7 +47,6 @@ export default function Home() {
   }
   function salvarStorage() {
     localStorage.setItem('users1', JSON.stringify(tasks));
-    
   }
 
   return (
@@ -83,6 +82,7 @@ export default function Home() {
                 Nome
               </label>
               <Input
+                id="title"
                 color="gray.100"
                 className="inputGroup"
                 type="text"
@@ -144,18 +144,7 @@ export default function Home() {
                 value={newTaskEndereco}
                 focusBorderColor="yellow.200"
               />
-              <label className="email" htmlFor="">
-                Endereço 2
-              </label>
-              <Input
-                color="gray.100"
-                className="inputGroup"
-                type="text"
-                placeholder=""
-                onChange={(e) => setnewTaskEndereco1(e.target.value)}
-                value={newTaskendereco1}
-                focusBorderColor="yellow.200"
-              />
+
               <Flex justifyContent="space-between" w="100%">
                 <Button
                   border="none"
