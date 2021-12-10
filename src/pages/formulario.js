@@ -15,11 +15,11 @@ export default function Home() {
   }, []);
 
   const [tasks, setTasks] = useState([]);
-  const [newTaskEndereco, setNewTaskEndereco] = useState('');
 
-  const [newTaskTelefone, setNewTaskTelefone] = useState('');
+
+
   const [newTaskCpf, setNewTaskCpf] = useState('');
-  const [newTaskEmail, setNewTaskEmail] = useState('');
+
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
   function handleCreateTask(e) {
@@ -28,10 +28,9 @@ export default function Home() {
     const newTask = {
       id: Math.random(),
       title: newTaskTitle,
-      email: newTaskEmail,
+
       cpf: newTaskCpf,
-      telefone: newTaskTelefone,
-      endereco: newTaskEndereco,
+
 
       isComplete: false,
     };
@@ -43,7 +42,7 @@ export default function Home() {
 
     setTasks((oldstate) => [...oldstate, newTask]);
 
-    setNewTaskEmail('');
+
   }
   function salvarStorage() {
     localStorage.setItem('users1', JSON.stringify(tasks));
@@ -68,8 +67,8 @@ export default function Home() {
           alignItems="center"
           mt="-30px"
           borderRadius="8px"
-          width="25rem"
-          h="38rem"
+          width="22rem"
+          h="20rem"
           boxShadow="6.48483px 12.4075px 0px rgba(0, 0, 0, 0.24), 4.7167px 9.02455px 0px rgba(0, 0, 0, 0.19425), 3.28294px 6.28132px 0px rgba(0, 0, 0, 0.162), 2.15316px 4.11969px 0px rgba(0, 0, 0, 0.13875), 1.29697px 2.48151px 0px rgba(0, 0, 0, 0.12), 0.683946px 1.30861px 0px rgba(0, 0, 0, 0.10125), 0.283711px 0.54283px 0px rgba(0, 0, 0, 0.078), 0.0658615px 0.126014px 0px rgba(0, 0, 0, 0.04575);"
         >
           <label style={{ marginTop: '10px' }} htmlFor="">
@@ -92,19 +91,9 @@ export default function Home() {
                 focusBorderColor="yellow.200"
               />
 
-              <label className="email" htmlFor="">
-                E-mail
-              </label>
 
-              <Input
-                color="gray.100"
-                className="inputGroup"
-                type="email"
-                placeholder=""
-                onChange={(e) => setNewTaskEmail(e.target.value)}
-                value={newTaskEmail}
-                focusBorderColor="yellow.200"
-              />
+
+
               <label className="email" htmlFor="">
                 CPF
               </label>
@@ -118,32 +107,9 @@ export default function Home() {
                 value={newTaskCpf}
                 focusBorderColor="yellow.200"
               />
-              <label className="email" htmlFor="">
-                Telefone
-              </label>
 
-              <Input
-                color="gray.100"
-                className="inputGroup"
-                type="number"
-                placeholder=""
-                onChange={(e) => setNewTaskTelefone(e.target.value)}
-                value={newTaskTelefone}
-                focusBorderColor="yellow.200"
-              />
-              <label className="email" htmlFor="">
-                Endereço
-              </label>
 
-              <Input
-                color="gray.100"
-                className="inputGroup"
-                type="text"
-                placeholder=""
-                onChange={(e) => setNewTaskEndereco(e.target.value)}
-                value={newTaskEndereco}
-                focusBorderColor="yellow.200"
-              />
+
 
               <Flex justifyContent="space-between" w="100%">
                 <Button

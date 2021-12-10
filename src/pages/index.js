@@ -41,13 +41,13 @@ export default function Cadastro() {
 
   const [busca, setBusca] = useState('');
   const [tasks, setTasks] = useState(['']);
-  const frutas = ['banana', 'pêra', 'uva', 'maça', 'abacate', 'morango'];
+
 
   // const tasksFilter = tasks.filter((task) => task.startsWith('a'));
 
   // const frutaFilter = frutas.filter((fruta) => fruta.startsWith(busca));
 
-  console.log(busca);
+
   useEffect(() => {
     const localStorageTasks = JSON.parse(localStorage.getItem('users1'));
     const tasks =
@@ -61,22 +61,15 @@ export default function Cadastro() {
     <>
       <Header1 />
       <Flex justifyContent="center" flexDirection="column">
-        <Input
-          w="40%"
-          type="text"
-          value={busca}
-          onChange={(e) => setBusca(e.target.value)}
-        />
+        
         <Flex w="100%">
           <Table>
             <Thead>
               <Tr>
                 <Th color="gray.300">Nome </Th>
-                <Th color="gray.300">E-mail </Th>
-                <Th color="gray.300">CPF </Th>
-                <Th color="gray.300">Telefone </Th>
-                <Th color="gray.300">Endereço</Th>
-                <Th color="gray.300">Endereço2</Th>
+
+                <Th color="gray.300">CPF / Pix</Th>
+
                 <Th></Th>
                 <Th></Th>
               </Tr>
@@ -86,17 +79,16 @@ export default function Cadastro() {
               <Tbody key={key}>
                 <Tr>
                   <Td>{task.title}</Td>
-                  <Td>{task.email} </Td>
+
                   <Td>{task.cpf}</Td>
-                  <Td>{task.telefone}</Td>
-                  <Td>{task.endereco}</Td>
-                  <Td>{task.endereco}</Td>
+
+
                   <Td>
                     <Flex
                       cursor="pointer"
                       type="button"
                       color="red.900"
-                      // onClick={() => updateTasks(task.id)}
+                    // onClick={() => updateTasks(task.id)}
                     >
                       <BiPencil />
                     </Flex>
