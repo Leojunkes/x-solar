@@ -25,6 +25,8 @@ export default function Cadastro() {
     }
   }
 
+
+
   function updateTasks(id) {
     const updateTasks = tasks.filter((task) =>
       task.id ? newTaskTitle : ''
@@ -39,8 +41,10 @@ export default function Cadastro() {
     window.location.reload();
   }
 
-  const [busca, setBusca] = useState('');
+  const [search, setSearch] = useState('')
   const [tasks, setTasks] = useState(['']);
+  const DATA_lIST = tasks
+  console.log(tasks)
 
 
   // const tasksFilter = tasks.filter((task) => task.startsWith('a'));
@@ -59,9 +63,11 @@ export default function Cadastro() {
 
   return (
     <>
+
       <Header1 />
+
       <Flex justifyContent="center" flexDirection="column">
-        
+        <Input type='text' placeholder='busca...' onChange={(e) => { setSearch(e.target.value) }} w='40%' />
         <Flex w="100%">
           <Table>
             <Thead>
@@ -75,7 +81,13 @@ export default function Cadastro() {
               </Tr>
             </Thead>
 
-            {tasks.map((task, key) => (
+            {DATA_lIST.filter((val) => {
+              if (search === '') {
+                return val;
+              } else if (val.title.toLowerCase().startsWith(search)) {
+                return val
+              }
+            }).map((task, key) => (
               <Tbody key={key}>
                 <Tr>
                   <Td>{task.title}</Td>
